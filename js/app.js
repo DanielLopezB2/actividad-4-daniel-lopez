@@ -1,23 +1,13 @@
 /**
  * TASK MANAGER - APLICACIÓN PRINCIPAL
- * Versión: 1.0.0 (HU-001)
- * Descripción: Inicialización y gestión de la interfaz
+ * Versión: 1.1.0 (HU-002)
  */
 
 'use strict';
 
-// Objeto principal de la aplicación
 const TaskManager = {
-    version: '1.0.0',
+    version: '1.1.0',
     initialized: false,
-    
-    // Elementos del DOM
-    elements: {
-        taskForm: null,
-        tasksContainer: null,
-        pendingCount: null,
-        completedCount: null
-    },
     
     /**
      * Inicializa la aplicación
@@ -27,55 +17,18 @@ const TaskManager = {
         console.log('   TASK MANAGER v' + this.version);
         console.log('=================================');
         
-        // Cachear elementos del DOM
-        this.cacheElements();
+        // Cargar tareas desde localStorage
+        TasksController.loadTasks();
         
-        // Inicializar event listeners
-        this.initEventListeners();
+        // Inicializar controladores
+        UIController.init();
+        FormController.init();
         
         this.initialized = true;
-        console.log('✅ Aplicación inicializada correctamente');
-        console.log('📋 Interfaz principal lista');
-    },
-    
-    /**
-     * Cachea los elementos del DOM
-     */
-    cacheElements() {
-        this.elements.taskForm = document.getElementById('task-form');
-        this.elements.tasksContainer = document.getElementById('tasks-container');
-        this.elements.pendingCount = document.getElementById('pending-count');
-        this.elements.completedCount = document.getElementById('completed-count');
-        
-        console.log('✅ Elementos del DOM cacheados');
-    },
-    
-    /**
-     * Inicializa los event listeners
-     */
-    initEventListeners() {
-        // Por ahora solo mostramos que el formulario está listo
-        if (this.elements.taskForm) {
-            this.elements.taskForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                console.log('📝 Formulario enviado - Funcionalidad pendiente (HU-002)');
-                alert('Esta funcionalidad se implementará en la Historia de Usuario 002');
-            });
-        }
-        
-        console.log('✅ Event listeners inicializados');
-    },
-    
-    /**
-     * Actualiza los contadores
-     */
-    updateCounters(pending = 0, completed = 0) {
-        if (this.elements.pendingCount) {
-            this.elements.pendingCount.textContent = pending;
-        }
-        if (this.elements.completedCount) {
-            this.elements.completedCount.textContent = completed;
-        }
+        console.log('✅ Aplicación completamente inicializada');
+        console.log('📋 Funcionalidades disponibles:');
+        console.log('   ✅ Crear tareas');
+        console.log('   ✅ Persistencia en localStorage');
     }
 };
 

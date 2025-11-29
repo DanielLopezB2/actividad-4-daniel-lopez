@@ -402,4 +402,33 @@ body {
         padding: var(--spacing-sm);
         font-size: 0.95rem;
     }
+
+    /* ============================================
+        ESTILOS ADICIONALES PARA HU-002
+    ============================================ */
+
+    /* Animación de éxito en input */
+    .success-flash {
+        animation: successFlash 0.5s ease;
+    }
+
+    @keyframes successFlash {
+        0%, 100% {
+            background-color: var(--surface);
+        }
+        50% {
+            background-color: #d4edda;
+            border-color: var(--priority-baja);
+        }
+    }
+
+    /* Validación de formulario */
+    .form-group input:invalid:not(:placeholder-shown),
+    .form-group textarea:invalid:not(:placeholder-shown) {
+        border-color: var(--priority-alta);
+    }
+
+    .form-group input:valid:not(:placeholder-shown) {
+        border-color: var(--priority-baja);
+    }
 }
