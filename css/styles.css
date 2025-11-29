@@ -431,4 +431,54 @@ body {
     .form-group input:valid:not(:placeholder-shown) {
         border-color: var(--priority-baja);
     }
+
+    /* ============================================
+   ESTILOS ADICIONALES PARA HU-004
+   ============================================ */
+
+    /* Animación de pulso para contadores */
+    .task-counter strong {
+        transition: all var(--transition-fast);
+    }
+
+    /* Animación de pulso para tarjeta */
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.02);
+        }
+    }
+
+    .task-card.pulse {
+        animation: pulse 0.3s ease;
+    }
+
+    /* Estado de hover mejorado para botón eliminar */
+    .btn-delete {
+        transition: all var(--transition-fast);
+    }
+
+    .btn-delete:hover {
+        transform: scale(1.2) rotate(10deg);
+    }
+
+    /* Mejora visual del checkbox */
+    .task-checkbox {
+        transition: all var(--transition-fast);
+    }
+
+    .task-checkbox:checked {
+        filter: hue-rotate(90deg);
+    }
+
+    /* Animación suave para label del checkbox */
+    .checkbox-label {
+        transition: color var(--transition-normal);
+    }
+
+    .completed .checkbox-label {
+        color: var(--text-light);
+    }
 }

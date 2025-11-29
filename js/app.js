@@ -1,12 +1,12 @@
 /**
  * TASK MANAGER - APLICACIÓN PRINCIPAL
- * Versión: 1.2.0 (HU-003)
+ * Versión: 1.3.0 (HU-004)
  */
 
 'use strict';
 
 const TaskManager = {
-    version: '1.2.0',
+    version: '1.3.0',
     initialized: false,
     
     /**
@@ -29,6 +29,8 @@ const TaskManager = {
         console.log('📋 Funcionalidades disponibles:');
         console.log('   ✅ Crear tareas');
         console.log('   ✅ Visualizar tareas en tarjetas');
+        console.log('   ✅ Marcar tareas como completadas');
+        console.log('   ✅ Eliminar tareas');
         console.log('   ✅ Persistencia en localStorage');
     }
 };
