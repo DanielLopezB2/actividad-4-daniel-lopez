@@ -8,6 +8,7 @@
     <title>Task Manager - Gestión de Tareas</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/filters.css">
 </head>
 <body>
     <div class="container">
@@ -83,9 +84,65 @@
                 </form>
             </section>
 
-            <!-- Sección de filtros (vacía por ahora) -->
-            <section class="filters-section" id="filters-section" style="display: none;">
-                <!-- Se implementará en HU-005 -->
+            <!-- Sección de filtros -->
+            <section class="filters-section" id="filters-section">
+                <h2>Filtros y Búsqueda</h2>
+                
+                <div class="filters-container">
+                    <!-- Barra de búsqueda -->
+                    <div class="search-box">
+                        <input 
+                            type="text" 
+                            id="search-input" 
+                            class="search-input"
+                            placeholder="🔍 Buscar tareas por título o descripción..."
+                        >
+                    </div>
+                    
+                    <!-- Filtros -->
+                    <div class="filters-grid">
+                        <div class="filter-group">
+                            <label for="filter-status">Estado</label>
+                            <select id="filter-status" class="filter-select">
+                                <option value="todas">Todas</option>
+                                <option value="pendientes">Pendientes</option>
+                                <option value="completadas">Completadas</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="filter-category">Categoría</label>
+                            <select id="filter-category" class="filter-select">
+                                <option value="todas">Todas</option>
+                                <option value="trabajo">💼 Trabajo</option>
+                                <option value="personal">👤 Personal</option>
+                                <option value="estudio">📚 Estudio</option>
+                                <option value="otros">📌 Otros</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="filter-priority">Prioridad</label>
+                            <select id="filter-priority" class="filter-select">
+                                <option value="todas">Todas</option>
+                                <option value="alta">🔴 Alta</option>
+                                <option value="media">🟡 Media</option>
+                                <option value="baja">🟢 Baja</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group filter-actions">
+                            <button id="clear-filters" class="btn btn-secondary disabled" disabled>
+                                🧹 Limpiar Filtros
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Contador de resultados -->
+                    <div id="results-count" class="results-count" style="display: none;">
+                        Mostrando 0 de 0 tareas
+                    </div>
+                </div>
             </section>
 
             <!-- Sección de visualización de tareas -->
@@ -103,8 +160,8 @@
         </main>
 
         <footer class="footer">
-            <p>&copy; Proyecto de Control de Versiones con Git y GitHub</p>
-            <p class="version">v1.0.0 - Sistema de Gestión de Tareas</p>
+            <p>&copy; 2025 - Proyecto de Control de Versiones con Git y GitHub</p>
+            <p class="version">v1.4.0 - Sistema de Gestión de Tareas</p>
         </footer>
     </div>
 
@@ -113,6 +170,7 @@
     <script src="js/tasks.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/state.js"></script>
+    <script src="js/filters.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
