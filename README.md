@@ -146,7 +146,7 @@ cd task-manager
 ## Enlaces
 
 - **Repositorio:** https://github.com/DanielLopezB2/actividad-4-daniel-lopez
-- **GitHub Pages:** 
+- **GitHub Pages:** https://daniellopezb2.github.io/actividad-4-daniel-lopez/
 
 ## Créditos
 
