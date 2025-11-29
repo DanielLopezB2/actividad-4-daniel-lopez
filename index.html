@@ -10,43 +10,104 @@
 </head>
 <body>
     <div class="container">
+        <!-- Header con contador de tareas -->
         <header class="header">
             <div class="header-content">
                 <h1>📋 Task Manager</h1>
-                <p class="subtitle">Sistema de Gestión de Tareas</p>
+                <p class="subtitle">Organiza tus tareas de manera eficiente</p>
+                <div class="task-counter">
+                    <span class="counter-item">
+                        <strong id="pending-count">0</strong> Pendientes
+                    </span>
+                    <span class="counter-separator">|</span>
+                    <span class="counter-item">
+                        <strong id="completed-count">0</strong> Completadas
+                    </span>
+                </div>
             </div>
         </header>
 
         <main class="main-content">
-            <div class="welcome-section">
-                <h2>Bienvenido al Task Manager</h2>
-                <p>Este proyecto está en construcción. Próximamente podrás gestionar tus tareas de manera eficiente.</p>
-                <div class="features-preview">
-                    <div class="feature-item">
-                        <span class="icon">✍️</span>
-                        <h3>Crear Tareas</h3>
-                        <p>Agrega tareas con título, descripción y prioridad</p>
+            <!-- Sección de formulario para agregar tareas -->
+            <section class="form-section">
+                <h2>Nueva Tarea</h2>
+                <form id="task-form" class="task-form">
+                    <div class="form-group">
+                        <label for="task-title">Título *</label>
+                        <input 
+                            type="text" 
+                            id="task-title" 
+                            name="title"
+                            placeholder="Ej: Completar informe mensual"
+                            required
+                            maxlength="100"
+                        >
                     </div>
-                    <div class="feature-item">
-                        <span class="icon">📊</span>
-                        <h3>Organizar</h3>
-                        <p>Categoriza y prioriza tus pendientes</p>
+
+                    <div class="form-group">
+                        <label for="task-description">Descripción</label>
+                        <textarea 
+                            id="task-description" 
+                            name="description"
+                            placeholder="Describe los detalles de la tarea..."
+                            rows="3"
+                            maxlength="500"
+                        ></textarea>
                     </div>
-                    <div class="feature-item">
-                        <span class="icon">🔍</span>
-                        <h3>Filtrar</h3>
-                        <p>Encuentra rápidamente lo que necesitas</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="task-category">Categoría</label>
+                            <select id="task-category" name="category">
+                                <option value="trabajo">💼 Trabajo</option>
+                                <option value="personal">👤 Personal</option>
+                                <option value="estudio">📚 Estudio</option>
+                                <option value="otros">📌 Otros</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="task-priority">Prioridad</label>
+                            <select id="task-priority" name="priority">
+                                <option value="baja">🟢 Baja</option>
+                                <option value="media" selected>🟡 Media</option>
+                                <option value="alta">🔴 Alta</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        ➕ Agregar Tarea
+                    </button>
+                </form>
+            </section>
+
+            <!-- Sección de filtros (vacía por ahora) -->
+            <section class="filters-section" id="filters-section" style="display: none;">
+                <!-- Se implementará en HU-005 -->
+            </section>
+
+            <!-- Sección de visualización de tareas -->
+            <section class="tasks-section">
+                <h2>Mis Tareas</h2>
+                <div id="tasks-container" class="tasks-grid">
+                    <!-- Las tareas se renderizarán aquí dinámicamente -->
+                    <div class="empty-state">
+                        <span class="empty-icon">📝</span>
+                        <p>No hay tareas todavía</p>
+                        <p class="empty-subtitle">Agrega tu primera tarea usando el formulario de arriba</p>
                     </div>
                 </div>
-            </div>
+            </section>
         </main>
 
         <footer class="footer">
-            <p>&copy; 2025 - Proyecto de Control de Versiones con Git y GitHub</p>
-            <p class="version">v0.1.0 - Versión inicial</p>
+            <p>&copy; Proyecto de Control de Versiones con Git y GitHub</p>
+            <p class="version">v1.0.0 - Sistema de Gestión de Tareas</p>
         </footer>
     </div>
 
+    <!-- Scripts -->
     <script src="js/app.js"></script>
 </body>
 </html>

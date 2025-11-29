@@ -1,18 +1,23 @@
 /**
  * TASK MANAGER - APLICACIÓN PRINCIPAL
- * Versión: 0.1.0
- * Descripción: Archivo de inicialización de la aplicación
+ * Versión: 1.0.0 (HU-001)
+ * Descripción: Inicialización y gestión de la interfaz
  */
 
 'use strict';
 
 // Objeto principal de la aplicación
 const TaskManager = {
-    // Versión de la aplicación
-    version: '0.1.0',
-    
-    // Estado de la aplicación
+    version: '1.0.0',
     initialized: false,
+    
+    // Elementos del DOM
+    elements: {
+        taskForm: null,
+        tasksContainer: null,
+        pendingCount: null,
+        completedCount: null
+    },
     
     /**
      * Inicializa la aplicación
@@ -21,78 +26,67 @@ const TaskManager = {
         console.log('=================================');
         console.log('   TASK MANAGER v' + this.version);
         console.log('=================================');
-        console.log('Aplicación inicializada correctamente');
-        console.log('Estado: En desarrollo');
-        console.log('=================================');
+        
+        // Cachear elementos del DOM
+        this.cacheElements();
+        
+        // Inicializar event listeners
+        this.initEventListeners();
         
         this.initialized = true;
-        this.displayWelcomeMessage();
+        console.log('✅ Aplicación inicializada correctamente');
+        console.log('📋 Interfaz principal lista');
     },
     
     /**
-     * Muestra mensaje de bienvenida en consola
+     * Cachea los elementos del DOM
      */
-    displayWelcomeMessage() {
-        console.log('');
-        console.log('👋 ¡Bienvenido al Task Manager!');
-        console.log('');
-        console.log('📋 Próximas funcionalidades:');
-        console.log('  ✅ Crear y agregar tareas');
-        console.log('  ✅ Visualizar tareas en tarjetas');
-        console.log('  ✅ Marcar tareas como completadas');
-        console.log('  ✅ Eliminar tareas');
-        console.log('  ✅ Filtrar y buscar tareas');
-        console.log('');
-        console.log('🚀 Este proyecto está siendo desarrollado con Git y GitHub');
-        console.log('');
+    cacheElements() {
+        this.elements.taskForm = document.getElementById('task-form');
+        this.elements.tasksContainer = document.getElementById('tasks-container');
+        this.elements.pendingCount = document.getElementById('pending-count');
+        this.elements.completedCount = document.getElementById('completed-count');
+        
+        console.log('✅ Elementos del DOM cacheados');
     },
     
     /**
-     * Obtiene información de la aplicación
+     * Inicializa los event listeners
      */
-    getInfo() {
-        return {
-            name: 'Task Manager',
-            version: this.version,
-            status: 'En desarrollo',
-            initialized: this.initialized
-        };
+    initEventListeners() {
+        // Por ahora solo mostramos que el formulario está listo
+        if (this.elements.taskForm) {
+            this.elements.taskForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                console.log('📝 Formulario enviado - Funcionalidad pendiente (HU-002)');
+                alert('Esta funcionalidad se implementará en la Historia de Usuario 002');
+            });
+        }
+        
+        console.log('✅ Event listeners inicializados');
+    },
+    
+    /**
+     * Actualiza los contadores
+     */
+    updateCounters(pending = 0, completed = 0) {
+        if (this.elements.pendingCount) {
+            this.elements.pendingCount.textContent = pending;
+        }
+        if (this.elements.completedCount) {
+            this.elements.completedCount.textContent = completed;
+        }
     }
 };
 
-// Event Listeners
+// Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar la aplicación cuando el DOM esté listo
     TaskManager.init();
     
-    // Agregar información adicional al footer
-    updateFooterInfo();
-});
-
-/**
- * Actualiza la información del footer con datos dinámicos
- */
-function updateFooterInfo() {
-    const versionElement = document.querySelector('.footer .version');
-    if (versionElement) {
+    // Actualizar año en footer
+    const footerText = document.querySelector('.footer p:first-child');
+    if (footerText) {
         const currentYear = new Date().getFullYear();
-        const footerText = document.querySelector('.footer p:first-child');
-        if (footerText) {
-            footerText.textContent = `© ${currentYear} Proyecto de Control de Versiones con Git y GitHub`;
-        }
+        footerText.textContent = `© ${currentYear} Proyecto de Control de Versiones con Git y GitHub`;
     }
-}
-
-/**
- * Función auxiliar para logging con timestamp
- */
-function logWithTimestamp(message) {
-    const now = new Date();
-    const timestamp = now.toLocaleTimeString('es-CO');
-    console.log(`[${timestamp}] ${message}`);
-}
-
-// Exportar para uso en otros módulos (si se necesita)
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = TaskManager;
-}
+});
