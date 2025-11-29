@@ -1,0 +1,326 @@
+/**
+ * TASK MANAGER - ESTILOS DE TARJETAS
+ * Versión: 1.2.0 (HU-003)
+ * Descripción: Estilos para las tarjetas de tareas
+ */
+
+/* ============================================
+   TARJETAS DE TAREAS
+   ============================================ */
+
+.task-card {
+    background: var(--surface);
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.task-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-light);
+}
+
+/* Indicador de prioridad */
+.task-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    transition: width var(--transition-fast);
+}
+
+.task-card:hover::before {
+    width: 6px;
+}
+
+.task-card.priority-alta::before {
+    background: var(--priority-alta);
+}
+
+.task-card.priority-media::before {
+    background: var(--priority-media);
+}
+
+.task-card.priority-baja::before {
+    background: var(--priority-baja);
+}
+
+/* ============================================
+   HEADER DE TARJETA
+   ============================================ */
+
+.task-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+}
+
+.task-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    flex: 1;
+    word-wrap: break-word;
+}
+
+.task-card-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+/* ============================================
+   CUERPO DE TARJETA
+   ============================================ */
+
+.task-card-body {
+    flex: 1;
+}
+
+.task-card-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: var(--spacing-sm);
+    word-wrap: break-word;
+}
+
+.task-card-description:empty {
+    display: none;
+}
+
+/* ============================================
+   FOOTER DE TARJETA
+   ============================================ */
+
+.task-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--border-color);
+}
+
+.task-card-meta {
+    display: flex;
+    gap: var(--spacing-xs);
+    flex-wrap: wrap;
+}
+
+/* ============================================
+   BADGES Y ETIQUETAS
+   ============================================ */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Badges de categoría */
+.badge-category {
+    color: white;
+}
+
+.badge-category.cat-trabajo {
+    background: var(--cat-trabajo);
+}
+
+.badge-category.cat-personal {
+    background: var(--cat-personal);
+}
+
+.badge-category.cat-estudio {
+    background: var(--cat-estudio);
+}
+
+.badge-category.cat-otros {
+    background: var(--cat-otros);
+}
+
+/* Badges de prioridad */
+.badge-priority {
+    color: white;
+}
+
+.badge-priority.priority-alta {
+    background: var(--priority-alta);
+}
+
+.badge-priority.priority-media {
+    background: var(--priority-media);
+}
+
+.badge-priority.priority-baja {
+    background: var(--priority-baja);
+}
+
+/* Badge de fecha */
+.badge-date {
+    background: var(--background);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+/* ============================================
+   CHECKBOX DE COMPLETADO
+   ============================================ */
+
+.task-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    cursor: pointer;
+}
+
+.task-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.checkbox-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    user-select: none;
+    cursor: pointer;
+}
+
+/* ============================================
+   BOTONES DE ACCIÓN
+   ============================================ */
+
+.btn-icon {
+    background: none;
+    border: none;
+    padding: 0.25rem;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: transform var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--border-radius-sm);
+}
+
+.btn-icon:hover {
+    transform: scale(1.1);
+    background: var(--background);
+}
+
+.btn-icon:active {
+    transform: scale(0.95);
+}
+
+.btn-delete {
+    color: var(--priority-alta);
+}
+
+.btn-delete:hover {
+    background: rgba(231, 76, 60, 0.1);
+}
+
+/* ============================================
+   ESTADO COMPLETADO
+   ============================================ */
+
+.task-card.completed {
+    opacity: 0.7;
+    background: var(--background);
+}
+
+.task-card.completed .task-card-title {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+}
+
+.task-card.completed .task-card-description {
+    text-decoration: line-through;
+}
+
+.task-card.completed::before {
+    background: var(--text-light) !important;
+}
+
+/* ============================================
+   ANIMACIONES
+   ============================================ */
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.task-card {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+.task-card.removing {
+    animation: slideOut 0.3s ease forwards;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 480px) {
+    .task-card {
+        padding: var(--spacing-sm);
+    }
+    
+    .task-card-title {
+        font-size: 1rem;
+    }
+    
+    .task-card-description {
+        font-size: 0.85rem;
+    }
+    
+    .task-card-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .task-card-meta {
+        width: 100%;
+    }
+}
