@@ -145,8 +145,8 @@ cd task-manager
 
 ## Enlaces
 
-- **Repositorio:** https://github.com/[usuario]/task-manager
-- **GitHub Pages:** https://[usuario].github.io/task-manager
+- **Repositorio:** https://github.com/DanielLopezB2/actividad-4-daniel-lopez
+- **GitHub Pages:** 
 
 ## Créditos
 
