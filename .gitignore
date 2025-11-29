@@ -1,0 +1,17 @@
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporal
+*.tmp
+*.temp
+
+# Node modules (si se expande el proyecto)
+node_modules/
