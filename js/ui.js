@@ -1,6 +1,6 @@
 /**
  * TASK MANAGER - CONTROLADOR DE UI
- * Versión: 1.2.0 (HU-003)
+ * Versión: 1.3.0 (HU-004)
  */
 
 'use strict';
@@ -167,19 +167,16 @@ const UIController = {
         if (deleteBtn) {
             deleteBtn.addEventListener('click', () => {
                 const taskId = taskCard.dataset.taskId;
-                this.handleDeleteTask(taskId);
+                this.handleDeleteTask(taskId, taskCard);
             });
         }
         
-        // Listener para toggle complete (se implementará en HU-004)
+        // Listener para toggle complete
         const checkbox = taskCard.querySelector('[data-action="toggle"]');
         if (checkbox) {
             checkbox.addEventListener('change', () => {
                 const taskId = taskCard.dataset.taskId;
-                console.log('⚠️ Toggle de tarea - Se implementará en HU-004');
-                // Por ahora revertimos el cambio
-                checkbox.checked = !checkbox.checked;
-                alert('Esta funcionalidad se implementará en la Historia de Usuario 004');
+                this.handleToggleTask(taskId, taskCard);
             });
         }
     },
@@ -193,11 +190,99 @@ const UIController = {
     },
     
     /**
-     * Maneja la eliminación de una tarea (placeholder para HU-004)
+     * Maneja el toggle de una tarea
      */
-    handleDeleteTask(taskId) {
-        console.log('⚠️ Eliminación de tarea - Se implementará completamente en HU-004');
-        alert('Esta funcionalidad se implementará completamente en la Historia de Usuario 004');
+    handleToggleTask(taskId, taskCard) {
+        try {
+            const task = StateManager.toggleTaskComplete(taskId);
+            
+            // Actualizar la tarjeta visualmente
+            const checkbox = taskCard.querySelector('[data-action="toggle"]');
+            const label = taskCard.querySelector('.checkbox-label');
+            
+            if (task.completed) {
+                taskCard.classList.add('completed');
+                label.textContent = 'Completada';
+            } else {
+                taskCard.classList.remove('completed');
+                label.textContent = 'Pendiente';
+            }
+            
+            // Actualizar contadores
+            this.updateCounters();
+            
+            // Animar la tarjeta
+            this.animateTaskToggle(taskCard, task.completed);
+            
+        } catch (error) {
+            ModalController.showError('No se pudo actualizar la tarea');
+            // Revertir el checkbox
+            const checkbox = taskCard.querySelector('[data-action="toggle"]');
+            checkbox.checked = !checkbox.checked;
+        }
+    },
+    
+    /**
+     * Maneja la eliminación de una tarea
+     */
+    handleDeleteTask(taskId, taskCard) {
+        try {
+            const task = TasksController.getTaskById(taskId);
+            
+            if (!task) {
+                throw new Error('Tarea no encontrada');
+            }
+            
+            // Confirmar eliminación
+            const confirmed = ModalController.confirmDelete(task.title);
+            
+            if (!confirmed) {
+                return;
+            }
+            
+            // Animar eliminación
+            taskCard.classList.add('removing');
+            
+            setTimeout(() => {
+                // Eliminar tarea
+                StateManager.deleteTask(taskId);
+                
+                // Remover del DOM
+                taskCard.remove();
+                
+                // Actualizar contadores
+                this.updateCounters();
+                
+                // Verificar si quedaron tareas
+                if (TasksController.getAllTasks().length === 0) {
+                    this.showEmptyState();
+                }
+                
+                ModalController.showSuccess('Tarea eliminada correctamente');
+            }, 300);
+            
+        } catch (error) {
+            ModalController.showError('No se pudo eliminar la tarea');
+        }
+    },
+    
+    /**
+     * Anima el toggle de una tarea
+     */
+    animateTaskToggle(taskCard, completed) {
+        // Agregar animación de pulso
+        taskCard.style.animation = 'none';
+        setTimeout(() => {
+            taskCard.style.animation = '';
+        }, 10);
+        
+        // Si se completó, mover al final después de un delay
+        if (completed) {
+            setTimeout(() => {
+                const container = this.elements.tasksContainer;
+                container.appendChild(taskCard);
+            }, 500);
+        }
     },
     
     /**
@@ -233,11 +318,26 @@ const UIController = {
         
         if (this.elements.pendingCount) {
             this.elements.pendingCount.textContent = stats.pending;
+            this.animateCounter(this.elements.pendingCount);
         }
         
         if (this.elements.completedCount) {
             this.elements.completedCount.textContent = stats.completed;
+            this.animateCounter(this.elements.completedCount);
         }
+    },
+    
+    /**
+     * Anima un contador cuando cambia
+     */
+    animateCounter(element) {
+        element.style.transform = 'scale(1.3)';
+        element.style.color = 'var(--primary-light)';
+        
+        setTimeout(() => {
+            element.style.transform = 'scale(1)';
+            element.style.color = '';
+        }, 300);
     },
     
     /**
